@@ -1,0 +1,16 @@
+# Binarios
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+vetcontrol-api
+# Variables de entorno — NUNCA subir
+.env
+# Dependencias del vendor
+/vendor/
+# GoLand
+.idea/
+# Archivos de sistema
+.DS_Store
+Thumbs.db
