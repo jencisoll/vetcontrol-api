@@ -44,34 +44,34 @@ export default function DashboardPage() {
     refetchInterval: 60_000,
   })
 
-  const cards = stats
-    ? [
-        {
-          title: 'Total Clientes',
-          value: stats.totalClientes.toLocaleString(),
-          sub: `+${stats.clientesNuevosEsteMes} este mes`,
-          color: 'text-blue-400',
-        },
-        {
-          title: 'Total Mascotas',
-          value: stats.totalMascotas.toLocaleString(),
-          sub: `${stats.mascotasAtendidas} atendidas`,
-          color: 'text-violet-400',
-        },
-        {
-          title: 'Citas Hoy',
-          value: stats.citasHoy,
-          sub: 'Programadas para hoy',
-          color: 'text-emerald-400',
-        },
-        {
-          title: 'Ingresos del Mes',
-          value: `S/ ${stats.ingresosMes.toLocaleString()}`,
-          sub: 'Mes en curso',
-          color: 'text-amber-400',
-        },
-      ]
-    : []
+    const cards = stats
+        ? [
+            {
+                title: 'Total Clientes',
+                value: stats.totalClientes.toLocaleString(),
+                sub: 'Clientes registrados',
+                color: 'text-blue-400',
+            },
+            {
+                title: 'Total Mascotas',
+                value: stats.totalMascotas.toLocaleString(),
+                sub: 'Mascotas registradas',
+                color: 'text-violet-400',
+            },
+            {
+                title: 'Citas Hoy',
+                value: stats.citasHoy,
+                sub: 'Programadas para hoy',
+                color: 'text-emerald-400',
+            },
+            {
+                title: 'Ingresos del Mes',
+                value: `S/ ${stats.ingresosMes.toLocaleString()}`,
+                sub: 'Mes en curso',
+                color: 'text-amber-400',
+            },
+        ]
+        : []
 
   return (
     <div className="max-w-6xl">
@@ -110,7 +110,7 @@ export default function DashboardPage() {
           {[
             { label: 'Nuevo Cliente',  href: '/dashboard/clientes', emoji: '👤' },
             { label: 'Nueva Mascota',  href: '/dashboard/mascotas', emoji: '🐾' },
-            { label: 'Ver Swagger',    href: 'http://localhost:8080/swagger-ui.html', emoji: '📋', external: true },
+            { label: 'Ver Swagger',    href: 'http://localhost:8081/swagger-ui.html', emoji: '📋', external: true },
           ].map(({ label, href, emoji, external }) => (
             <a
               key={label}

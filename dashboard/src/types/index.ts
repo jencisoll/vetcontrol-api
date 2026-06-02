@@ -32,34 +32,34 @@ export interface AuthResponse {
   user:      UserResponse
 }
 // ── Dashboard ───────────────────────────────────────────────
+// types.ts o donde tengas la interfaz
+// types.ts o donde tengas la interfaz
 export interface DashboardStats {
-  totalClientes: number
-  totalMascotas: number
-  citasHoy: number
-  ingresosMes: number
-  clientesNuevosEsteMes: number
-  mascotasAtendidas: number
+  totalClientes: number;
+  totalMascotas: number;
+  citasHoy: number;
+  ingresosMes: number;
+  clientesNuevosEsteMes: number;
+  mascotasAtendidas: number;
 }
 
 // ── Cliente ─────────────────────────────────────────────────
 export interface ClienteResponse {
-  id: number
-  nombre: string
-  apellido: string
-  email: string
-  telefono: string
-  direccion: string
-  fechaRegistro: string   // ISO date string
-  mascotas: number        // count
-  activo: boolean
+  id:        number
+  fullName:  string    // ← era nombre + apellido
+  dni:       string    // ← nuevo campo
+  phone:     string    // ← era telefono
+  email:     string
+  address:   string    // ← era direccion
+  petsCount: number    // ← era mascotas
+  createdAt: string
 }
-
 export interface ClienteRequest {
-  nombre: string
-  apellido: string
-  email: string
-  telefono: string
-  direccion: string
+  fullName:  string
+  dni:       string
+  phone:     string
+  email:     string
+  address:   string
 }
 
 // ── Mascota ─────────────────────────────────────────────────
@@ -88,13 +88,14 @@ export interface MascotaRequest {
 
 // ── Paginación ──────────────────────────────────────────────
 export interface PageResponse<T> {
-  content: T[]
+  content:       T[]
+  pageNumber:    number   // ← era "number" antes
+  pageSize:      number   // ← era "size" antes
   totalElements: number
-  totalPages: number
-  size: number
-  number: number      // current page (0-indexed)
-  first: boolean
-  last: boolean
+  totalPages:    number
+  last:          boolean
+  first:         boolean
+  empty:         boolean
 }
 
 // ── Error API ───────────────────────────────────────────────

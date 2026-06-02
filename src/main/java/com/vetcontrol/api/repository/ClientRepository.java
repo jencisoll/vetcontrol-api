@@ -18,11 +18,14 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
     boolean existsByDni(String dni);
 
     @Query("SELECT c FROM Client c WHERE " +
-           "(:search IS NULL OR LOWER(c.fullName) LIKE LOWER(CONCAT('%', :search, '%')) OR " +
-           "LOWER(c.dni) LIKE LOWER(CONCAT('%', :search, '%')) OR " +
-           "LOWER(c.phone) LIKE LOWER(CONCAT('%', :search, '%')) OR " +
-           "LOWER(c.email) LIKE LOWER(CONCAT('%', :search, '%'))) AND " +
-           "(:hasPets IS NULL OR (:hasPets = true AND SIZE(c.pets) > 0) OR (:hasPets = false AND SIZE(c.pets) = 0))")
+            "(:search = '' OR " +
+            "LOWER(c.fullName) LIKE LOWER(CONCAT('%', :search, '%')) OR " +
+            "LOWER(c.dni) LIKE LOWER(CONCAT('%', :search, '%')) OR " +
+            "LOWER(c.phone) LIKE LOWER(CONCAT('%', :search, '%')) OR " +
+            "LOWER(c.email) LIKE LOWER(CONCAT('%', :search, '%'))) AND " +
+            "(:hasPets IS NULL OR " +
+            "(:hasPets = true AND SIZE(c.pets) > 0) OR " +
+            "(:hasPets = false AND SIZE(c.pets) = 0))")
     Page<Client> findAllWithFilters(
             @Param("search") String search,
             @Param("hasPets") Boolean hasPets,

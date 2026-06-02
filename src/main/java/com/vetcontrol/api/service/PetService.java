@@ -26,10 +26,28 @@ public class PetService {
 
     private final PetRepository petRepository;
     private final ClientRepository clientRepository;
+    public PageResponse<PetResponse> getAllPets(
+            String search, Long clientId, String species, Pageable pageable) {
 
-    public PageResponse<PetResponse> getAllPets(String search, Long clientId, String species, Pageable pageable) {
-        Page<Pet> page = petRepository.findAllWithFilters(search, clientId, species, pageable);
-        return mapToPageResponse(page);
+        // ✅ null → "" para evitar error de tipo en PostgreSQL
+        String searchParam  = search  != null ? search  : "";
+        String speciesParam = species != null ? species : "";
+
+        Page<Pet> page = petRepository.findAllWithFilters(
+                searchParam, clientId, speciesParam, pageable);
+
+        return PageResponse.<PetResponse>builder()
+                .content(page.getContent().stream()
+                        .map(this::mapToResponse)
+                        .collect(Collectors.toList()))
+                .pageNumber(page.getNumber())
+                .pageSize(page.getSize())
+                .totalElements(page.getTotalElements())
+                .totalPages(page.getTotalPages())
+                .first(page.isFirst())
+                .last(page.isLast())
+                .empty(page.isEmpty())
+                .build();
     }
 
     public PetResponse getPetById(Long id) {

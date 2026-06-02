@@ -18,11 +18,12 @@ public interface PetRepository extends JpaRepository<Pet, Long> {
     Page<Pet> findByClientId(Long clientId, Pageable pageable);
 
     @Query("SELECT p FROM Pet p WHERE " +
-           "(:search IS NULL OR LOWER(p.name) LIKE LOWER(CONCAT('%', :search, '%')) OR " +
-           "LOWER(p.species) LIKE LOWER(CONCAT('%', :search, '%')) OR " +
-           "LOWER(p.breed) LIKE LOWER(CONCAT('%', :search, '%'))) AND " +
-           "(:clientId IS NULL OR p.client.id = :clientId) AND " +
-           "(:species IS NULL OR LOWER(p.species) = LOWER(:species))")
+            "(:search = '' OR " +
+            "LOWER(p.name) LIKE LOWER(CONCAT('%', :search, '%')) OR " +
+            "LOWER(p.species) LIKE LOWER(CONCAT('%', :search, '%')) OR " +
+            "LOWER(p.breed) LIKE LOWER(CONCAT('%', :search, '%'))) AND " +
+            "(:clientId IS NULL OR p.client.id = :clientId) AND " +
+            "(:species = '' OR LOWER(p.species) = LOWER(:species))")
     Page<Pet> findAllWithFilters(
             @Param("search") String search,
             @Param("clientId") Long clientId,
