@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Scrollbar */
+::-webkit-scrollbar        { width: 5px; height: 5px; }
+::-webkit-scrollbar-track  { background: #0f172a; }
+::-webkit-scrollbar-thumb  { background: #334155; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #3b82f6; }
+
+/* Font */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap');
+
+body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+}
